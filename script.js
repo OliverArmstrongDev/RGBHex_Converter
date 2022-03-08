@@ -2,6 +2,7 @@
     const rLab = document.getElementById("r-label");
     const gLab = document.getElementById("g-label");
     const bLab = document.getElementById("b-label");
+    const rgbLab = document.getElementById("rgb-label-main");
     let Rslide = document.getElementById("r");
     let Gslide = document.getElementById("g");
     let Bslide = document.getElementById("b");
@@ -27,9 +28,10 @@ function changeRange() {
     // Change background color and text.
     document.body.style.backgroundColor = colour
     document.getElementById("hex-label").innerText = colour;
-    rLab.innerText = r;
-    gLab.innerText = g;
-    bLab.innerText = b;
+    rLab.textContent = r;
+    gLab.textContent = g;
+    bLab.textContent = b;
+    rgbLab.textContent = '(rgb) '+ r + ','+ g + ',' +b;
      
     if (r < 120 && g < 120 && b < 120) {
         document.querySelectorAll(".rgb-label, .tHeader, #hex-label").forEach(e => e.style.color = "white");

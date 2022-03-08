@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Converter NoTable</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+    <div id="container">
+        <div class="row">
+            <div class="col"><label class="sliderLabel" for="r">Red</label>
+                <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="r">
+                <label class="rgb-label" for="r" id="r-label">255</label>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            
+            <label class="sliderLabel" for="g">Green</label>
+            <label class="sliderLabel" for="b">Blue</label>
+        </div>
+        <div class="sliders">
+            
+            <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="g">
+            <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="b">
+                
+        </div>
+        <div class="labelValue">
+                
+                <label class="rgb-label" for="g" id="g-label">255</label>
+                <label class="rgb-label" for="b" id="b-label">255</label>
+        </div>
+        <div class="currentValue">
+            <h1 id="hex-label">#ffffff</h1>
+            <h1 id="rgb-label-main">255,0,0</h1>
+            <input type="text" placeholder="RGB value">
+        </div>
+        </div>
+    <script src="script.js"></script>
+</body>
+</html>
