@@ -4,35 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colour Converter NoTable</title>
+    <title>RGB HEX Colour Converter</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet"> 
 </head>
 <body>
     
-
-    <div id="container">
-        <table>
-            <tr>
-                <th class="tHeader">Red</th>
-                <th class="tHeader">Green</th>
-                <th class="tHeader">Blue</th>
-            </tr>
-            <tr>
-                <th><input type="range" min="0" max="255" value="255" onchange="changeRange()" id="r"></th>
-                <th><input type="range" min="0" max="255" value="255" onchange="changeRange()" id="g"></th>
-                <th><input type="range" min="0" max="255" value="255" onchange="changeRange()" id="b"></th>
-                
-            </tr>
-           <tr>
-               <td class="rgb-label" id="r-label">255</td>
-               <td class="rgb-label" id="g-label">255</td>
-               <td class="rgb-label" id="b-label">255</td>
-           </tr>
+    
+ <div class="headerRow">
+             <h1 class="heading-main">Please select the RBG values to get Hex or enter Hex to get RGB...</h1>
+        </div>
+    <div id="colContainer">
+       
+        <div class="col">
+                <label id="r-title" class="sliderLabel" for="r">Red</label>
+                <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="r">
+                <label class="rgb-label" for="r" id="r-label">255</label>
+            </div>
+            <div class="col">
+                <label id="g-title" class="sliderLabel" for="g">Green</label> 
+            <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="g">
+            <label class="rgb-label" for="g" id="g-label">255</label>
+            <div class="rgbInput"><input id="RGB-input" type="text" style="height:2em; width:auto;" placeholder="Enter RGB value..."> </div>
+            </div>
+            <div class="col">
+                <label id="b-title" class="sliderLabel" for="b">Blue</label>
+                <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="b">
+                <label class="rgb-label" for="b" id="b-label">255</label>
+            </div>
+       </div>
+        
+    <div class="valuesContainer">
+        <div class="currentValue">
+            <h1 id="hex-label">Hex: #ffffff</h1>
+            <h1 id="rgb-label-main">(rgb): 255,255,255</h1>
             
-        </table>
-        <h1 id="hex-label">#ffffff</h1>
-        <h1 id="rgb-label-main">255,0,0</h1>
-        <input type="text" placeholder="RGB value">
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
