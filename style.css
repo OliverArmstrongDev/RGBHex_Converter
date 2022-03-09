@@ -2,6 +2,7 @@ body{
     font-family: 'Acme', sans-serif;
     font-size: 25px;
 }
+
 input::placeholder
 {
     font-family: 'Acme', sans-serif;
@@ -10,42 +11,86 @@ input::placeholder
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    text-align: center;
 }
 #colContainer{
-    display: flex;
-    gap: 1em;
-    justify-content: center;
-    align-items: flex-start; 
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    height: 170px;
-    margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: flex-end;
+
+    height: 50vh;
+    margin-bottom: 20px;
 }   
 .col{
-    height:1em;
+    
+    height:4em;
+    align-items: center;
     display: flex; 
     flex-direction: column;
 }
-.rgbInput{
- padding-top: 20px;
- height: 20px;
- order:2
+.rgbHexInput{
+    grid-column: 1/-1;
+    padding-top: 20px;
+    height: 20px;
+    
+
 }
 
 h1{
     font-size: 1em;
 }
 .valuesContainer{
-    padding-top: 1em;
+    /* margin-top: 1em; */
     display: flex;
+    flex-direction: column;
     gap: 1em;
     text-align: center;
     justify-content: center;
     align-items: center; 
 }
+.button {
+    color: #fff;
+    background-color: rgb(103, 103, 221);
+    width: 140px;
+    height: 40px;
+    border-radius: 6px;
+    box-shadow: 3px 2px rgb(197, 197, 197);
+    
+  }
+  .button:hover{
+    background-color: rgb(132, 167, 218);
+  }
 
-@media all and (max-width: 600px) {
-.rgbInput{
-    order: 3;
+  #RGBHex-input{
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #f2f2f2;
+    padding: 12px;
+    border-radius: 3px;
+    width: 280px;
+    font-size: 17px;
+    font-family: inherit;
+    margin-right: 6px;
+  }
+  #RGBHex-input::placeholder{
+    font-size: 14px;
+  }
+  
+@media all and (max-width: 830px) {
+.valuesContainer{
+   margin: 4em 0 4em 0;
 }
+
+  #colContainer{
+    grid-template-columns: 1fr;
+  }
+  .headerRow{
+  margin-bottom: 2em;
+}
+ 
 }
