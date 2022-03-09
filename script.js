@@ -2,58 +2,133 @@
     const rLab = document.getElementById("r-label");
     const gLab = document.getElementById("g-label");
     const bLab = document.getElementById("b-label");
+    const rgbBtn = document.getElementById("copyRGB");
+    const hexBtn = document.getElementById("copyHex");
+    const convertBtn = document.getElementById("rgbHexConvert");
+    const rgbHexInp = document.getElementById("RGBHex-input");
+    const sliderLab = document.getElementById("sliderLabel");
     const rgbLab = document.getElementById("rgb-label-main");
+    const hexLab = document.getElementById("hex-label");
     let Rslide = document.getElementById("r");
     let Gslide = document.getElementById("g");
     let Bslide = document.getElementById("b");
+    let rgbReturn = [[],[]];
 
 
     //change slider values live
 
-    Rslide.oninput = () =>  rLab.innerHTML = Rslide.value;
-    Gslide.oninput = () =>  gLab.innerHTML = Gslide.value;
-    Bslide.oninput = () =>  bLab.innerHTML = Bslide.value;
+    Rslide.oninput = () =>  changeRange();
+    Gslide.oninput = () =>  changeRange();
+    Bslide.oninput = () =>  changeRange();
+    
+  
+   //Functions...
+
+const changeRange = (colour,colType) => {
+    // Get R,G,B values & Convert string into integer.
+    // 
+    let r;
+    let g;
+    let b;
+    let _colour;
+
     
 
-function changeRange() {
-    // Get R,G,B values & Convert string into integer.
-    var r = parseInt(document.getElementById("r").value);
-    var g = parseInt(document.getElementById("g").value);
-    var b = parseInt(document.getElementById("b").value);
+    if(colType === "RGB" || colType === "HEX" ){
+        
+        console.table(colour);
+        r = colour[1][0];
+        g = colour[1][1];
+        b = colour[1][2];
+    }
+    else{
+        r = parseInt(document.getElementById("r").value);
+        g = parseInt(document.getElementById("g").value);
+        b = parseInt(document.getElementById("b").value);
+    }
 
-    // Generate color. Example: #20b9ff
-    var colour = rgbToHex(r,g,b);
-    //"#" + hex(r) + hex(g) + hex(b);
+
+         colour === undefined || colour[0].length === 0 ? _colour = rgbToHex(r,g,b) : _colour = colour[0].toString(); //check rgb
+        // _colour = rgbToHex(r,g,b);
+        // Change background color and text.
+        document.body.style.backgroundColor = _colour;
+        document.getElementById("hex-label").innerText = _colour;
+        rLab.textContent = r;
+        gLab.textContent = g;
+        bLab.textContent = b;
+        rgbLab.textContent = '(rgb)'+ r + ','+ g + ',' +b;
+        Rslide.value = r;
+        Gslide.value = g;
+        Bslide.value = b;
+   
      
-    // Change background color and text.
-    document.body.style.backgroundColor = colour
-    document.getElementById("hex-label").innerText = colour;
-    rLab.textContent = r;
-    gLab.textContent = g;
-    bLab.textContent = b;
-    rgbLab.textContent = '(rgb) '+ r + ','+ g + ',' +b;
-     
-    if (r < 120 && g < 120 && b < 120) {
-        document.querySelectorAll(".rgb-label, .tHeader, #hex-label").forEach(e => e.style.color = "white");
+    if (r < 150 && g < 150 && b < 150) {
+        document.querySelectorAll(".heading-main, .rgb-label, .sliderLabel, #hex-label, #rgb-label-main").forEach(e => e.style.color = "white");
         
         
     } else {
-        document.querySelectorAll(".rgb-label, .tHeader, #hex-label").forEach(e => e.style.color = "black");
+        document.querySelectorAll(".heading-main, .rgb-label, .sliderLabel, #hex-label, #rgb-label-main").forEach(e => e.style.color = "black");
     }
 }
 
-//make textbox work and do reverse hex to rbg
-
+const isRGB =(_Val) => {
+    rgbReturn = [[],[]]; // clear array
+   if(_Val.includes(',') || _Val.toUpperCase().includes('RGB')) 
+    {
+        
+        let rgbvals = _Val.toUpperCase().replace("(RGB)", "").split(',').map(v => parseInt(v));
+        rgbReturn[0].push(rgbToHex(rgbvals[0],rgbvals[1],rgbvals[2])); //hex
+        rgbReturn[1].push(rgbvals[0],rgbvals[1],rgbvals[2]); //rgb
+        changeRange(rgbReturn, "HEX");
+    }
+    else{
+        rgbReturn[0].push(_Val);
+        rgbReturn[1].push(...hexToRGB(_Val));
+        changeRange(rgbReturn, "RGB");
+    }
+   
+}
 const rgbToHex = (r, g, b) => {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    
+}
+const hexToRGB = (hexVal) => {
+    if(hexVal.length > 3){
+        var r = parseInt(hexVal.substr(1,2),16);
+        var g = parseInt(hexVal.substr(3,2),16);
+        var b = parseInt(hexVal.substr(5,2),16);    
+        return [r,g,b];
+      }    
+      
+}
+const copyToClipboard = (element) => {
+    
+    var copyText = element.textContent;
+    navigator.clipboard.writeText(copyText).then(() => {
+        console.log("successfully copied");
+      })
+      .catch(() => {
+        console.log("something went wrong");
+      });
 }
 
-console.log(rgbToHex(0, 255, 0)); // #ffffff
+//Event Listeners
 
+convertBtn.addEventListener("click", () => {
+    isRGB(rgbHexInp.value)
+    convertBtn.textContent = "Converted!"; 
+    setTimeout(() => convertBtn.textContent = "Convert RGB/HEX", 500);
+});
 
-function hexToRGBA(hex, opacity) {
-    return 'rgba(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16) }).concat(isFinite(opacity) ? opacity : 1).join(',') + ')';
-}
+rgbBtn.addEventListener("click", () => {
+    copyToClipboard(rgbLab);
+    rgbBtn.textContent = "Copied!"; 
+    setTimeout(() => rgbBtn.textContent = "Copy RGB Value", 1000);
+});
 
-console.log(hexToRGBA("#ffffff",1));
+hexBtn.addEventListener("click", () => {
+    copyToClipboard(hexLab);
+    hexBtn.textContent = "Copied!"; 
+    setTimeout(() => hexBtn.textContent = "Copy Hex Value", 1000);
+});
 

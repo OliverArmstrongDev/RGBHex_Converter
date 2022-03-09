@@ -16,33 +16,43 @@
  <div class="headerRow">
              <h1 class="heading-main">Please select the RBG values to get Hex or enter Hex to get RGB...</h1>
         </div>
+        
     <div id="colContainer">
        
         <div class="col">
                 <label id="r-title" class="sliderLabel" for="r">Red</label>
-                <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="r">
+                <input type="range" min="0" max="255" value="255"  id="r">
                 <label class="rgb-label" for="r" id="r-label">255</label>
             </div>
             <div class="col">
                 <label id="g-title" class="sliderLabel" for="g">Green</label> 
-            <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="g">
+            <input type="range" min="0" max="255" value="255"  id="g">
             <label class="rgb-label" for="g" id="g-label">255</label>
-            <div class="rgbInput"><input id="RGB-input" type="text" style="height:2em; width:auto;" placeholder="Enter RGB value..."> </div>
             </div>
+            
             <div class="col">
                 <label id="b-title" class="sliderLabel" for="b">Blue</label>
-                <input type="range" min="0" max="255" value="255" onchange="changeRange()" id="b">
+                <input type="range" min="0" max="255" value="255" id="b">
                 <label class="rgb-label" for="b" id="b-label">255</label>
             </div>
+            <div class="rgbHexInput">
+                <input id="RGBHex-input" type="text" style="height:2em; width:auto;" placeholder="Enter RGB or Hex value..."> 
+                <button class="button" id="rgbHexConvert">Convert RGB/HEX</button>
+            </div> 
        </div>
         
     <div class="valuesContainer">
-        <div class="currentValue">
-            <h1 id="hex-label">Hex: #ffffff</h1>
-            <h1 id="rgb-label-main">(rgb): 255,255,255</h1>
+            <div class="hexValues">
+                <h1 id="hex-label">Hex: #ffffff</h1>
+            <button class="button"id="copyHex">Copy Hex Value</button></div>
+            <div class="RGBValues">
+           <h1 id="rgb-label-main">(rgb)255,255,255</h1>
+           <button class="button" id="copyRGB">Copy RGB Value</button>
+            </div>
             
-        </div>
     </div>
+</div>
+       
     <script src="script.js"></script>
 </body>
 </html>
